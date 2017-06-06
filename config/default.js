@@ -19,12 +19,18 @@ module.exports = {
     auth: {
         secret: 'default',
         client: {
-            discover_url: 'https://sso.aut.ac.ir',
-            client_id: 'ticketing',
+            discover_url: 'https://localhost:3000',
+            client_id: 'buffet',
             client_secret: ''
         }
     },
 
+    log: {
+        sentry: {
+            dsn: null
+        },
+        audit: {},
+    },
 
 };
 

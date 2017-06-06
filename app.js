@@ -15,6 +15,9 @@ const AppPolicy = require('./policy');
 
 init({
     plugins: [
+        // Logging
+        {register: LoggingPlugin, options: Config.get('log')},
+
         // Mongoose
         {register: MongoosePlugin, options: Config.get('mongo')},
 

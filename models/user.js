@@ -5,7 +5,7 @@ const {ACTIONS} = require('../lib/audit');
 class User extends BaseUser {
 
     static get $visible() {
-        return ['_id', 'name', 'username', 'email', 'avatar', 'roles', 'departments'];
+        return ['_id', 'name', 'username', 'email', 'avatar', 'roles'];
     }
 
     static get $schema() {

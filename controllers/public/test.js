@@ -4,6 +4,7 @@
 
 
 const  Controller = require('bak/lib/controller');
+const {User} = require('../../models');
 
 class TestController extends Controller {
     constructor() {
@@ -14,7 +15,7 @@ class TestController extends Controller {
     }
 
     async _(request, reply) {
-        reply('This is from test!');
+        reply('Helllo world!');
     }
 }
 
