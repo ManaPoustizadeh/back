@@ -14,6 +14,10 @@ class PublicController extends Controller {
     async _(request, reply) {
         reply('Hello World!');
     }
+
+    async getHello(request, reply) {
+        reply(' World!');
+    }
 }
 
 module.exports = PublicController;
