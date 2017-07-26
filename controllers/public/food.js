@@ -3,8 +3,8 @@
  */
 
 
-const  Controller = require('bak/lib/controller');
-const {Food, User} = require('../../models');
+const Controller = require('bak/lib/controller');
+const { Food, User } = require('../../models');
 
 class FoodController extends Controller {
 
@@ -13,7 +13,7 @@ class FoodController extends Controller {
         reply(foods);
     }
 
-    async $id(request, reply, {id}){
+    async $id(request, reply, { id }) {
         let user = User.findOne({
             _id: id
         }).populate({
