@@ -8,7 +8,7 @@ module.exports = {
      */
     mongo: {
         connections: {
-            default: {uri: 'localhost/buffet'}
+            default: {uri: 'mongodb://localhost:27017/buffet'}
         }
     },
 

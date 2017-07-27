@@ -24,9 +24,9 @@ class User extends BaseUser {
     }
 
     afterLogout({request, session}) {
-        request.audit({
-            action: ACTIONS.USER_LOGOUT,
-        });
+        // request.audit({
+        //     action: ACTIONS.USER_LOGOUT,
+        // });
     }
 
 }
