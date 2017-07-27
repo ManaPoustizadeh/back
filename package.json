@@ -15,7 +15,8 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "bak": "^0.8.0",
+    "bak": "^0.10.0",
+    "hapi": "16.4.3",
     "handlebars": "^4.0.8",
     "scooter": "^4.0.0"
   }
