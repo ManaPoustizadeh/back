@@ -8,6 +8,13 @@ const { Food, User } = require('../../models');
 
 class FoodController extends Controller {
 
+    constructor() {
+        super({
+            models: {Food, User},
+            default: {}
+        });
+    }
+
     async _(request, reply) {
         let foods = Food.find({});
         reply(foods);

@@ -2,7 +2,7 @@ const {Schema} = require('mongoose');
 const {Model} = require('bak');
 
 class Food extends Model{
-
+    
     static get $schema() {
         return {
             name: {type: String, required: true},

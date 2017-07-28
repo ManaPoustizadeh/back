@@ -8,6 +8,12 @@ const {Category} = require('../../models');
 
 class CategoryController extends Controller {
    
+    constructor() {
+        super({
+            models: {Category},
+            default: {}
+        });
+    }
 
     /*
     ** Gives all categories populated with their foods
