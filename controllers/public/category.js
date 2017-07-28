@@ -22,6 +22,11 @@ class CategoryController extends Controller {
         const  categories  = Category.find({}).populate('foods')
         reply(categories)  
     }
+
+    async $id(request, reply, {id}) {
+        const category = Category.findById(id).populate('foods')
+        reply(category)
+    }
 }
 
 module.exports = CategoryController;
