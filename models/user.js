@@ -14,6 +14,7 @@ class User extends BaseUser {
             email: {type: String},
             orders: [{type: Schema.Types.ObjectId, ref: 'Order'}],
             roles: {type: Array},
+            avatar: {type: String}
         });
     }
 
