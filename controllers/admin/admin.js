@@ -22,6 +22,16 @@ class AdminController extends AdminBaseController {
         });
         reply(user);
     }
+
+    async $id_address_post(request, reply, { id }) {
+        let user =await User.findOne({
+            _id: id
+        }, (err, user) => {
+            user.addresses = request.payload.addresses;
+            user.save();
+            reply(user)
+        });
+    }
 }
 
 module.exports = AdminController;
