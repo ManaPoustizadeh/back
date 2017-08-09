@@ -10,9 +10,9 @@ class AdminBaseController extends Controller {
         super(_.defaultsDeep({
             default: {
                 auth: {mode: 'required'},
-                // plugins: {
-                //     guards: ['access_admin']
-                // }
+                plugins: {
+                    guards: ['access_admin']
+                }
             }
         }, opts));
     }
