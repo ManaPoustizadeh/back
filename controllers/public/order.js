@@ -19,7 +19,11 @@ class OrderController extends Controller{
 	
 	  async _post(request, reply) {
         const filter = request.payload.filter;
-        const orders = Order.find({status: {$in: filter}}).populate('foods');
+        let orders = '';
+        if(filter)
+            orders = Order.find({status: {$in: filter}}).populate('foods');
+        if(filter.length==0)
+            orders = Order.find({}).populate('foods');
         reply(orders);
     }
 	
