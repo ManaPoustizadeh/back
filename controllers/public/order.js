@@ -17,13 +17,16 @@ class OrderController extends Controller{
         reply(orders);
     }
 	
-	  async _post(request, reply) {
-        const filter = request.payload.filter;
+    async _post(request, reply) {
+        const filter = request.payload.obj.filter;
+        const perPage = request.payload.obj.perPage;
+        const curPage = request.payload.obj.curPage;
+        let cur = curPage == 0 ? 0 : curPage-1;
         let orders = '';
         if(filter)
-            orders = Order.find({status: {$in: filter}}).populate('foods');
+            orders = await Order.find({status: {$in: filter}}).populate('foods').skip(perPage * cur).limit(perPage);
         if(filter.length==0)
-            orders = Order.find({}).populate('foods');
+            orders = await Order.find({}).populate('foods').skip(perPage * cur).limit(perPage);
         reply(orders);
     }
 	
