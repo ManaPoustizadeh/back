@@ -23,11 +23,13 @@ class OrderController extends Controller{
         const curPage = request.payload.obj.curPage;
         let cur = curPage == 0 ? 0 : curPage-1;
         let orders = '';
-        if(filter)
-            orders = await Order.find({status: {$in: filter}}).populate('foods').skip(perPage * cur).limit(perPage);
-        if(filter.length==0)
+        let filterOrder = await Order.find({status: {$in: filter}});
+        orders = await Order.find({status: {$in: filter}}).populate('foods').skip(perPage * cur).limit(perPage);
+        if(filter.length==0){
+            filterOrder = await Order.find({});
             orders = await Order.find({}).populate('foods').skip(perPage * cur).limit(perPage);
-        reply(orders);
+        }
+        reply({orders, count:filterOrder.length});
     }
 	
 	 async $id_post(request, reply, {id}){
