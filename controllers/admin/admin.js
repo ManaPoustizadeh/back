@@ -23,6 +23,20 @@ class AdminController extends AdminBaseController {
         });
         reply(user);
     }
+
+    async order_post(request, reply) {
+        const filter = request.payload.obj.filter;
+        const perPage = request.payload.obj.perPage;
+        const curPage = request.payload.obj.curPage;
+        let cur = curPage == 0 ? 0 : curPage-1;
+        let filterOrder = await Order.find({status: {$in: filter}});
+        let orders = await Order.find({status: {$in: filter}}).populate('foods').skip(perPage * cur).limit(perPage);
+        if(filter.length==0){
+            filterOrder = await Order.find({});
+            orders = await Order.find({}).populate('foods').skip(perPage * cur).limit(perPage);
+        }
+        reply({orders, count:filterOrder.length});
+    }
    
 }
 
