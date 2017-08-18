@@ -28,6 +28,29 @@ class UserController extends Controller {
         });
         reply(user);
     }
+
+    async $id_post(request, reply, { id }) {
+        const username = request.payload.username;
+        const email = request.payload.email;
+        const avatar = request.payload.avatar;
+        const password = request.payload.password;
+        User.findOne({
+            _id: id
+        }, (err, user) => {
+            user.username = username;
+            user.email = email;
+            user.avatar = avatar;
+            if(password.length != 0)
+                user.password = password;
+            try {
+                user.save();
+                reply({ user })
+            } catch (error) {
+                Boom.badData('Error Saving User Info');
+            }
+        })
+        
+    }
     
     async $id_address_post(request, reply, { id }) {
         let user =await User.findOne({
