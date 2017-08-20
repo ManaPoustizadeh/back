@@ -7,17 +7,23 @@ class OrderController extends Controller{
 
     constructor() {
         super({
-            models: {Order, Food},
+            models: {Food, Order},
             default: {}
         });
     }
-
     async _(request, reply) {
         let orders = Order.find({}).populate('foods');
         reply(orders);
     }
 
-	 async $id_post(request, reply, {id}){
+    async $id(request, reply, { id }) {
+        const order = Order.findOne({
+            _id: id
+        });
+        reply(order);
+    }
+
+	async $id_post(request, reply, {id}){
         const state = request.payload.state;
         Order.findById(id, function (err, order) {
             if (err) return handleError(err);
@@ -27,6 +33,20 @@ class OrderController extends Controller{
                 if (err) return handleError(err);
                 reply(updatedOrder)
             });
+        });
+    }
+
+    async pay_$id_post(request, reply, { id }) {
+        Order.findOne({
+            _id: id
+        }, (err, order) => {
+            try {
+                order.paid = true;
+                order.save();
+                reply(order)
+            } catch (error) {
+                Boom.badData('Error Saving Order Info');
+            }
         });
     }
 

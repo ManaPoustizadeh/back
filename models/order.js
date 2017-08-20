@@ -10,6 +10,7 @@ class Order extends Model{
             foods: [{type: Schema.Types.ObjectId, ref: 'Food'}],
             price: {type: Schema.Types.Number}, //total price for an order set
             address: {type: String},
+            paid: {type: Boolean, default: false},
             status: {type: String, enum: ['accepted', 'in_progress', 'ready', 'sent'], default: 'accepted'} //This is for re-ordering and changing category order for the restaurant
         }
     }
