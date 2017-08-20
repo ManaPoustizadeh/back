@@ -67,6 +67,7 @@ class UserController extends Controller {
             foods: request.payload.order.foods, 
             price: request.payload.order.price, 
             address: request.payload.order.address,
+            paid: false,
             status: 'accepted'
         });
         let user =await User.findOne({
@@ -83,6 +84,8 @@ class UserController extends Controller {
             }
         });
     }
+
+    
 
 
 

@@ -29,11 +29,11 @@ class AdminController extends AdminBaseController {
         const perPage = request.payload.obj.perPage;
         const curPage = request.payload.obj.curPage;
         let cur = curPage == 0 ? 0 : curPage-1;
-        let filterOrder = await Order.find({status: {$in: filter}});
-        let orders = await Order.find({status: {$in: filter}}).populate('foods').skip(perPage * cur).limit(perPage);
+        let filterOrder = await Order.find({status: {$in: filter}, paid: true});
+        let orders = await Order.find({status: {$in: filter}, paid: true}).populate('foods').skip(perPage * cur).limit(perPage);
         if(filter.length==0){
-            filterOrder = await Order.find({});
-            orders = await Order.find({}).populate('foods').skip(perPage * cur).limit(perPage);
+            filterOrder = await Order.find({paid: true});
+            orders = await Order.find({paid: true}).populate('foods').skip(perPage * cur).limit(perPage);
         }
         reply({orders, count:filterOrder.length});
     }
