@@ -36,14 +36,14 @@ class OrderController extends Controller{
         });
     }
 
-    async $id_patch(request, reply, { id }) {
+    async pay_$id_post(request, reply, { id }) {
         Order.findOne({
             _id: id
         }, (err, order) => {
             try {
                 order.paid = true;
                 order.save();
-                reply({order})
+                reply(order)
             } catch (error) {
                 Boom.badData('Error Saving Order Info');
             }
