@@ -1,9 +1,6 @@
 const AdminBaseController = require('./_base');
 const Boom = require('boom');
-const {
-    User,
-    Order
-} = require('../../models');
+const {User,Order, Category, Food} = require('../../models');
 
 class AdminController extends AdminBaseController {
 
