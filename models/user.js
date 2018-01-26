@@ -5,23 +5,17 @@ const {ACTIONS} = require('../lib/audit');
 class User extends BaseUser {
 
     static get $visible() {
-        return ['_id', 'name', 'username', 'email', 'avatar', 'roles', 'orders', 'addresses'];
+        return ['_id', 'username', 'email', 'avatar', 'roles', 'comments'];
     }
 
     static get $schema() {
 
-        let addressSchema = new Schema({
-            _id: {type: String, required: true},
-            addressText: {type: String, required: true}
-        });
-
         return Object.assign({}, BaseUser.$schema, {
-            name: {type: String},
+            username: {type: String},
             email: {type: String},
-            orders: [{type: Schema.Types.ObjectId, ref: 'Order'}],
-            addresses: [addressSchema],
+            comments: [{type: Schema.Types.ObjectId, ref:'Comment'}],
             roles: {type: Array},
-            avatar: {type: String}
+            avatar: {type: String},
         });
     }
 

@@ -8,10 +8,11 @@ module.exports = {
      */
     mongo: {
         connections: {
-            default: {uri: 'mongodb://localhost:27017/buffet'}
+            default: {uri: 'mongodb://127.0.0.1:27017/amdb'}
         }
     },
 
+    host: 'http://127.0.0.1',
 
     /**
      * Configure auth
@@ -19,8 +20,8 @@ module.exports = {
     auth: {
         secret: 'default',
         client: {
-            discover_url: 'https://localhost:3000',
-            client_id: 'buffet',
+            discover_url: 'https://127.0.0.1:3000',
+            client_id: 'amdb',
             client_secret: ''
         }
     },

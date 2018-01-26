@@ -1,11 +1,11 @@
 const User = require('./user');
-const Food = require('./food');
-const Order = require('./order');
-const Category = require('./category');
+const Movie = require('./movie');
+const Comment = require('./comment');
+
+
 
 module.exports = {
     User,
-    Food,
-    Category,
-    Order
+    Movie,
+    Comment
 };

@@ -1,38 +1,52 @@
-/**
- * Created by rajab on 5/28/2017.
- */
+
+
 const Controller = require('bak/lib/controller');
-const { User } = require('../../models');
-const Boom = require('boom');
+const { Movie, Comment } = require('../../models');
+
 class PublicController extends Controller {
 
     constructor() {
         super({
-            models: {User},
+            models: {Movie},
             default: {}
         });
     }
 
-    async _(request, reply) {
-        reply('Hello World!');
+    async homepage(request, reply) {
+        let searchBackground = "http://iranfilm.info/wp-content/uploads/2017/12/startwars.jpg";
+        let staticBanner = "http://iranfilm.info/wp-content/uploads/2018/01/image_preview5454.png";
+        let staticBannerTitle =  "بروسلی رو بگیر";
+        let staticBannerSubTitle =  "بیا بگیرش دیگه";
+        let staticBannerBackColor =  "#DAA521";
+        let staticBannerTextColor = "black";
+        let answer = {
+            searchBackground,
+            staticBanner, 
+            staticBannerTitle, 
+            staticBannerSubTitle,
+            staticBannerBackColor,
+            staticBannerTextColor,
+        };
+        reply(answer);
     }
 
-    async getHello(request, reply) {
-        reply(' World!');
+    async search(request, reply){
+        let movie = await Movie.find({$or: [{title: new RegExp(request.url.query.q, 'i')} , {description: new RegExp(request.url.query.q, 'i')}]});
+        reply(movie);
     }
 
-    async register_post(request, reply) {
-        const name = request.payload.name;
-        const email = request.payload.email;
-        const password = request.payload.password;
-        let user = new User({username: name, email: email, password: password});
+    async submit_post(request, reply) {
+        let movie = new Movie(request.payload.movie);
+        // console.log(movie);
         try {
-            await user.save();
-            reply(user);
+            movie.save();
+            reply(movie);
         } catch (error) {
-            reply(Boom.badData());
+            console.log(error);
         }
     }
+
+
 }
 
 module.exports = PublicController;
