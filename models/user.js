@@ -5,7 +5,7 @@ const {ACTIONS} = require('../lib/audit');
 class User extends BaseUser {
 
     static get $visible() {
-        return ['_id', 'username', 'email', 'avatar', 'roles', 'comments'];
+        return ['_id', 'username', 'email', 'avatar', 'roles', 'comments', 'phoneNumber', 'lastName', 'nickName'];
     }
 
     static get $schema() {
@@ -16,6 +16,9 @@ class User extends BaseUser {
             comments: [{type: Schema.Types.ObjectId, ref:'Comment'}],
             roles: {type: Array},
             avatar: {type: String},
+            phoneNumber: {type: String},
+            lastName: {type: String},
+            nickName: {type: String}
         });
     }
 

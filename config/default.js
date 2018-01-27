@@ -8,11 +8,16 @@ module.exports = {
      */
     mongo: {
         connections: {
-            default: {uri: 'mongodb://127.0.0.1:27017/amdb'}
+            default: {uri: 'mongodb://localhost:27017/amdb'}
         }
     },
 
     host: 'http://127.0.0.1',
+
+    payload: {
+        output: 'stream',
+        allow: 'multipart/form-data' // important
+    },
 
     /**
      * Configure auth

@@ -36,10 +36,7 @@ class MovieController extends Controller {
     }
 
     async $id_comments(request, reply, { id }){
-        let comments = await Comment.find({}).populate({
-            path: 'movies',
-            match: {_id:id}
-        }).sort({'created_at': -1});
+        let comments = Comment.find({'movie': id}).sort({'created_at': -1});
         reply(comments);
     }
 
@@ -48,19 +45,24 @@ class MovieController extends Controller {
             author,
             comment,
             rate,
+            directorScore,
+            writingScore, 
+            actingScore,
+            avatar,
         } = request.payload;
-        let newComment = new Comment({author, comment, rate});
-        Movie.findById(id, function(error, movie){
+        let newComment = new Comment({author, comment, rate, directorScore, writingScore, actingScore, avatar});
+        await Movie.findById(id, function(error, movie){
             if(error)
-                return handleError(error);
+            return handleError(error);
             newComment.movie = movie;
+            console.log(newComment);
             try {
-                newComment.save();
-                movie.comments.push(newComment);
+                movie.comments = movie.comments.concat([newComment]);
                 movie.save();
-                reply(movie);
+                newComment.save();
+                // reply(movie);
             } catch (error) {
-                reply(error)
+                console.log(error);
             }
 
         })

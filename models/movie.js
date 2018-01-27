@@ -6,13 +6,13 @@ class Movie extends Model{
     static get $schema() {
         return {
             // created_at: {type: Schema.Types.Date},
-            description: {type: String, text: true, index: true},
-            title: {type: String, text:true},
+            title: {type: String},
+            description: {type: String},
             original_title: {type: String}, //total price for an order set
             rate: {type: Schema.Types.Number, min:0, max:5},
             year: {type: Schema.Types.Number},
             length: {type: String},
-            language: {type: String},
+            lang: {type: String},
             thumbnail: {type: String},
             genres: [{type: String}],
             country: {type: String},
